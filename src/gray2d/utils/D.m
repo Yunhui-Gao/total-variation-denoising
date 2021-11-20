@@ -1,4 +1,4 @@
-function grad = grads(x)
+function grad = D(x)
 % *************************************************************************
 % * This function calculates the finite differences of an image x.
 % *************************************************************************
@@ -8,24 +8,22 @@ function grad = grads(x)
 %
 %   ===== Required inputs =================================================
 %
-%	- x     : 1D/2D/3D array
+%	- x     : 2D array
 %             The input image. 
 %
 %   ===== Outputs =========================================================
 %
-%   - grad : 2D/3D/4D array
+%   - grad : 3D array
 %            The finite differences of x.
 %
 % *************************************************************************
 
-[n1,n2,n3] = size(x);
-grad = zeros(n1,n2,n3,3);
-grad(:,:,:,1) = x - circshift(x,[-1,0,0]);
-grad(n1,:,:,1) = 0;
-grad(:,:,:,2) = x - circshift(x,[0,-1,0]);
-grad(:,n2,:,2) = 0;
-grad(:,:,:,3) = x - circshift(x,[0,0,-1]);
-grad(:,:,n3,3) = 0;
+[n1,n2] = size(x);
+grad = zeros(n1,n2,2);
+grad(:,:,1) = x - circshift(x,[-1,0]);
+grad(n1,:,1) = 0;
+grad(:,:,2) = x - circshift(x,[0,-1]);
+grad(:,n2,2) = 0;
 
 end
 
