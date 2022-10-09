@@ -18,7 +18,7 @@ clear;clc;
 close all;
 
 % load source functions and test image
-addpath(genpath('../src'))
+addpath(genpath('../src/gray2d'))
 img = im2double(imread('../data/cameraman.tif'));
 img = imresize(img,[256,256]);
 
@@ -36,7 +36,7 @@ set(gcf,'unit','normalized','position',[0.25,0.3,0.5,0.4])
 %% run the algorithm
 rng(0)  % random seed, for reproducibility
 
-lambda = 1e-1;      % regularization parameter
+lambda = 0.8e-1;      % regularization parameter
 n_iters = 50;       % number of iterations
 
 [x,runtime] = FGP_gray2d(y,lambda,n_iters);  % FPG
