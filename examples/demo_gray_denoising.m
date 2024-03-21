@@ -39,13 +39,8 @@ rng(0)  % random seed, for reproducibility
 lambda = 0.8e-1;      % regularization parameter
 n_iters = 50;       % number of iterations
 
-[x,runtime] = FGP_gray2d(y,lambda,n_iters);  % FPG
+[x,runtime] = denoise_gray(y,lambda,n_iters);  % FPG
 disp(['runtime: ',num2str(runtime),' s'])
 figure,imshow(x,[])     
-title(['Reconstruction using the FGP algorithm after ',num2str(n_iters),' iterations'],'interpreter','latex')
+title(['Reconstruction after ',num2str(n_iters),' iterations'],'interpreter','latex')
 
-n_iters = 50;       % number of iterations
-[x,runtime] = ADMM_gray2d(y,lambda,n_iters); % ADMM
-disp(['runtime: ',num2str(runtime),' s'])
-figure,imshow(x,[])     
-title(['Reconstruction using the ADMM after ',num2str(n_iters),' iterations'],'interpreter','latex')

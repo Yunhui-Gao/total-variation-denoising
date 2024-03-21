@@ -44,7 +44,7 @@ rng(0)  % random seed, for reproducibility
 lambda = 2e-1;      % regularization parameter
 n_iters = 50;       % number of iterations
 
-[x,runtime] = FGP_color2d(y,lambda,n_iters);  % FPG
+[x,runtime] = denoise_color(y,lambda,n_iters);  % FPG
 disp(['runtime: ',num2str(runtime),' s'])
 figure,imshow(x,[])     
 title(['Reconstruction using the FGP algorithm after ',num2str(n_iters),' iterations'],'interpreter','latex')

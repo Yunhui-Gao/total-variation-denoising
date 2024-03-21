@@ -1,4 +1,4 @@
-function [x,runtime] = FGP_gray2d(y,lambda,n_iters,varargin)
+function [x,runtime] = denoise_gray(y,lam,n_iters,varargin)
 % *************************************************************************
 % * This function applies the fast gradient projection (FGP) algorithm to
 %   solve the following denoising problem: 
@@ -9,7 +9,7 @@ function [x,runtime] = FGP_gray2d(y,lambda,n_iters,varargin)
 %   where y denotes the noisy observation, TV(x) stands for the total 
 %   variation (TV) regularizer of x.
 %
-%   See the Readme.md file for details.
+%   See the README.md file for details.
 % 
 % * References:
 %   [1] A. Beck and M. Teboulle, "Fast Gradient-Based Algorithms for 
@@ -25,9 +25,9 @@ function [x,runtime] = FGP_gray2d(y,lambda,n_iters,varargin)
 %   ===== Required inputs =================================================
 %
 %	- y       : 2D array
-%               The noisy observation.
+%               Noisy image.
 %
-%   - lambda  : float
+%   - lam     : float
 %               Regularization parameter.
 %
 %   - n_iters : int
@@ -42,7 +42,7 @@ function [x,runtime] = FGP_gray2d(y,lambda,n_iters,varargin)
 %   ===== Outputs =========================================================
 %
 %   - x       : 2D array
-%               The solution.
+%               Denoised image.
 %
 %   - runtime : float
 %               Runtime of the algorithm.
@@ -85,7 +85,7 @@ t_prev = 1;
 timer = tic;
 if strcmp(tv_type,'anisotropic')
     for i = 1:n_iters
-        grad_next = u + 1/8/lambda*D(y - lambda*DT(u));
+        grad_next = u + 1/8/lam*D(y - lam*DT(u));
         deno = zeros(n1,n2,2);
         deno(:,:,1) = max(1,abs(grad_next(:,:,1)));
         deno(:,:,2) = max(1,abs(grad_next(:,:,2)));
@@ -97,7 +97,7 @@ if strcmp(tv_type,'anisotropic')
     end  
 else
     for i = 1:n_iters
-        grad_next = u + 1/8/lambda*D(y - lambda*DT(u));
+        grad_next = u + 1/8/lam*D(y - lam*DT(u));
         deno = zeros(n1,n2,2);
         deno(:,:,1) = max(1,sqrt(grad_next(:,:,1).^2 + grad_next(:,:,2).^2));
         deno(:,:,2) = deno(:,:,1);
@@ -109,7 +109,7 @@ else
     end
 end
 
-x = y - lambda*DT(grad_next);    % convert to the primal optimal
+x = y - lam*DT(grad_next);    % convert to the primal optimal
 runtime = toc(timer);
 
 end
