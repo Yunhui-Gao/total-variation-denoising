@@ -37,7 +37,7 @@ where $\left\| \cdot \right\|_\mathrm{F}$ stands for the **Frobenius norm**, and
 
 ### Notations
 
-We limit our scope to dealing with the class of **proper, convex, lower-semicontinuous functions** from $\mathbb{R}^d$ to $\left] -\infty, +\infty \right]$, which is denoted as $\Gamma$.
+We limit our scope to dealing with the class of **proper, convex, lower-semicontinuous functions** from $\mathbb{R}^d$ to $\left( -\infty, +\infty \right)$, which is denoted as $\Gamma$.
 
 Since we are mainly concerned with images, which are represented by matrices instead of vectors, we use the **Frobenius norm** and **Frobenius inner product** as default operators for $\left\| \cdot \right\|$ and $\left\langle \cdot, \cdot \right\rangle$, respectively.
 
@@ -73,7 +73,7 @@ Below are some commonly encountered functions and their corresponding conjugate.
 
 - Suppose $\mathbf{a}$ is a constant matrix. The conjugate of $f(\mathbf{x} + \mathbf{a})$ is $f^*(\mathbf{x^*}) + \left\langle\mathbf{a, x^*}\right\rangle$.
 
-- Suppose $\alpha$ is a scalar in $\left] 0, +\infty \right[$. Then the conjugate of $\alpha f(\mathbf{x})$ is $\alpha f^*(\mathbf{x}^*/\alpha)$.
+- Suppose $\alpha$ is a scalar in $\left( 0, +\infty \right)$. Then the conjugate of $\alpha f(\mathbf{x})$ is $\alpha f^*(\mathbf{x}^*/\alpha)$.
 
 - Suppose $f$ is the [**support function**](#support-functions) of a closed convex set $C$, i.e., $f(\mathbf{x}) = \sigma_C (\mathbf{x})$. Then $f^*$ is the **indicator function** of $C$, i.e., $f^*(\mathbf{x^*}) = \mathcal{I}_C(\mathbf{x^*})$.
 
@@ -147,10 +147,10 @@ $$
 
 Then the isotropic TV norm can be expressed more compactly as
 $$
-\begin{aligned}
+\begin{align}
 \left\| \mathbf{x} \right\|_\mathrm{TVi} &= g(\mathbf{u,v}) \\
 &= \sum_{i=1}^{m-1}\sum_{j=1}^{n-1} \sqrt{u_{i,j}^2 + v_{i,j}^2} + \sum_{i=1}^{m-1} \left| u_{i,n} \right| + \sum_{j=1}^{n-1} \left| v_{m,j} \right|. \tag{10}
-\end{aligned}
+\end{align}
 $$
 
 Then we can see that the denoising problem indeed has the form given by $(2)$, with $f(\mathbf{x}) = 1/(2\lambda)\left\| \mathbf{x} - \mathbf{b} \right\|^2$, $\mathcal{L}(\mathbf{x}) = (\mathbf{u,v})$, and $g(\mathbf{u,v})$ given above. Therefore, we follow the steps in the above section, and solve the problem via the dual.
@@ -273,7 +273,7 @@ $$
 \sigma_{C}(\mathbf{x^*}) = \sup\limits_{\mathbf{x} \in C} \left\langle \mathbf{x},\mathbf{x^*} \right\rangle. \tag{A.1}
 $$
 
-In fact, a function $f$ is the support function of a nonempty closed convex set if and only if $f\in\Gamma$ and it is **positively homogeneous**, i.e., $f(\alpha\mathbf{x}) = \alpha f(\mathbf{x}), \forall \mathbf{x}\in\mathbb{R}^d, \forall \alpha \in \left] 0, +\infty \right[$.
+In fact, a function $f$ is the support function of a nonempty closed convex set if and only if $f\in\Gamma$ and it is **positively homogeneous**, i.e., $f(\alpha\mathbf{x}) = \alpha f(\mathbf{x}), \forall \mathbf{x}\in\mathbb{R}^d, \forall \alpha \in \left( 0, +\infty \right)$.
 
 One important example for this is the **norms**. One can easily verify that the **$l_1$ norm** is the support function of the hypercube $\left[ -1,1 \right]^d$, and that the **$l_2$ norm** is the support function of the unit sphere $C=\left\{ \mathbf{x}\in\mathbb{R}^d : \left\| \mathbf{x} \right\| \leq 1 \right\}$.
 
